@@ -75,7 +75,7 @@ namespace QCEnabler
         [HarmonyPrefix]
         public static void InitializeMscorelibFix()
         {
-            //Skip command table generation
+            //Skip command table generation because of problems with mscorlib and the way QC detects scans the assemblies
             var property = typeof(QuantumConsoleProcessor).GetProperty("TableGenerated", BindingFlags.Static | BindingFlags.Public);
             property.SetValue(null, true);
         }
@@ -91,7 +91,7 @@ namespace QCEnabler
             var logMessages = new List<string>();
             bool enableLogging = false;
 
-            //unity writes while we read but the file is not locked.
+            //unity writes while this code reads. The file is not locked.
             //https://stackoverflow.com/questions/9759697/reading-a-file-used-by-another-process its basically the same case.
             using (var fs = new FileStream(path, FileMode.Open, FileAccess.Read, FileShare.ReadWrite))
             using (var sr = new StreamReader(fs, Encoding.Default))
@@ -118,6 +118,7 @@ namespace QCEnabler
             return logMessages;
         }
 
+        //from erkle64 specifically https://github.com/erkle64/Configurator/blob/main/Configurator/Plugin.cs
         public static T GetAsset<T>(string name) where T : UnityEngine.Object
         {
             if (!bundleMainAssets.TryGetValue(name, out var asset))
