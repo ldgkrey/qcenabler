@@ -1,0 +1,11 @@
+{
+  "identifier": "ldgKrey_QCEnabler",
+  "displayName": "Quantum Console Enabler",
+  "assetBundles": [
+	"qcprefab.bundle"
+  ],
+  "assemblies": [
+    "QCEnabler.dll"
+  ]
+}
+
