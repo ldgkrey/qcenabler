@@ -29,7 +29,7 @@ namespace QCEnabler
 
             if (mod == null)
             {
-                Debug.LogError("Cant found mod?");
+                Debug.LogError("QCEnabler: Cant found mod?");
                 return;
             }
 
@@ -45,13 +45,13 @@ namespace QCEnabler
             var instance = GameObject.Instantiate(prefab);
             if (!instance.TryGetComponent<QuantumConsole>(out var console))
             {
-                Debug.LogError("Quantum Console not found on prefab instance");
+                Debug.LogError("QCEnabler: Quantum Console not found on prefab instance");
                 return;
             }
 
             if (!instance.TryGetComponent<Canvas>(out var canvas))
             {
-                Debug.LogError("Canvas on console object not found");
+                Debug.LogError("QCEnabler: Canvas on console object not found");
                 return;
             }
 
@@ -122,7 +122,7 @@ namespace QCEnabler
         {
             if (!bundleMainAssets.TryGetValue(name, out var asset))
             {
-                Debug.Log($"Missing asset '{name}'");
+                Debug.Log($"QCEnabler: Missing asset '{name}'");
                 return null;
             }
 
