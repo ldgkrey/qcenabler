@@ -8,7 +8,7 @@ using System.Reflection;
 using System.Text;
 using UnityEngine;
 
-namespace QCEnabler
+namespace LDGKrey.QCEnabler
 {
     [HarmonyPatch]
     public class QCEnabler
@@ -66,7 +66,7 @@ namespace QCEnabler
                 console.LogToConsole(log);
             }
 
-            CommandExtension.AddCommands();
+            Commands.AddCommands();
 
             //console.Activate(true);
         }
@@ -118,7 +118,7 @@ namespace QCEnabler
             return logMessages;
         }
 
-        //from erkle64 specifically https://github.com/erkle64/Configurator/blob/main/Configurator/Plugin.cs
+        //from erkle64 specifically https://github.com/erkle64/Configurator/blob/main/Configurator/Plugin.cs except for edited Debug.Log
         public static T GetAsset<T>(string name) where T : UnityEngine.Object
         {
             if (!bundleMainAssets.TryGetValue(name, out var asset))

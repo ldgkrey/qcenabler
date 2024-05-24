@@ -1,12 +1,11 @@
 ﻿using QFSW.QC;
 using System;
-using System.Linq.Expressions;
 using System.Reflection;
 using UnityEngine;
 
-namespace QCEnabler
+namespace LDGKrey.QCEnabler
 {
-    public static class CommandExtension
+    public static class Commands
     {
         public static void AddCommands()
         {
@@ -20,19 +19,10 @@ namespace QCEnabler
 
         static void AddTestCommand()
         {
-            try
-            {
-                CommandAttribute commandAttribute = new CommandAttribute("calcAdd", "Adds two integers together.");
+            var method = typeof(Commands).GetMethod(nameof(TestCommand));
 
-                CommandData commandData = new CommandData(typeof(CommandExtension).GetMethod(nameof(TestCommand)), commandAttribute);
-
-                QuantumConsoleProcessor.TryAddCommand(commandData);
-            }
-            catch (Exception ex)
-            {
-                Debug.LogException(ex);
-                return;
-            }
+            if (!AddCommand(method, new string[] { "calcAdd", "calc" }, "Adds two integers togther"))
+                Debug.LogWarning("Could not add 'calcAdd' to commands.");
         }
 
         static void AddCommandCount()
@@ -127,6 +117,37 @@ namespace QCEnabler
         public static int TestCommand(int a, int b)
         {
             return a + b;
+        }
+
+        //Utility
+        public static bool AddCommand(MethodInfo method, string alias, string description = "")
+            => AddCommandLogic(method, alias, description);
+
+        public static bool AddCommand(MethodInfo method, string[] aliases, string description = "")
+        {
+            var result = true;
+            foreach(var alias in aliases)
+            {
+                if (!AddCommandLogic(method, alias, description))
+                    result = false;
+            }
+
+            return result;
+        }
+
+        static bool AddCommandLogic(MethodInfo method, string alias, string description = "")
+        {
+            try
+            {
+                CommandAttribute commandAttribute = new CommandAttribute(alias, description);
+                CommandData commandData = new CommandData(method, commandAttribute);
+                return QuantumConsoleProcessor.TryAddCommand(commandData);
+            }
+            catch (Exception ex)
+            {
+                Debug.LogException(ex);
+                return false;
+            }
         }
     }
 }
