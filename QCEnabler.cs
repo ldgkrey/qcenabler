@@ -1,12 +1,10 @@
 ﻿using C3.ModKit;
 using HarmonyLib;
 using QFSW.QC;
-using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Reflection;
-using System.Runtime.Remoting.Messaging;
 using System.Text;
 using UnityEngine;
 
@@ -67,6 +65,8 @@ namespace QCEnabler
             {
                 console.LogToConsole(log);
             }
+
+            CommandExtension.AddCommands();
 
             //console.Activate(true);
         }
