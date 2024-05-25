@@ -1,5 +1,6 @@
 ﻿using QFSW.QC;
 using System;
+using System.Collections.Generic;
 using System.Reflection;
 using UnityEngine;
 
@@ -10,7 +11,7 @@ namespace LDGKrey.QCEnabler
         public static bool AddStaticCommand(MethodInfo method, string alias, string description = "")
             => AddStaticCommandLogic(method, alias, description);
 
-        public static bool AddStaticCommand(MethodInfo method, string[] aliases, string description = "")
+        public static bool AddStaticCommand(MethodInfo method, IEnumerable<string> aliases, string description = "")
         {
             var result = true;
             foreach (var alias in aliases)

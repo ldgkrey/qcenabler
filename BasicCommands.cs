@@ -27,91 +27,37 @@ namespace LDGKrey.QCEnabler
 
         static void AddCommandCount()
         {
-            try
-            {
-                CommandAttribute commandAttribute = new CommandAttribute("command-count", "Gets the number of loaded commands.");
+            var method = typeof(QuantumConsoleProcessor).GetProperty(nameof(QuantumConsoleProcessor.LoadedCommandCount)).GetMethod;
 
-                CommandData commandData = new CommandData(typeof(QuantumConsoleProcessor).GetProperty(nameof(QuantumConsoleProcessor.LoadedCommandCount)).GetMethod, commandAttribute);
-
-                QuantumConsoleProcessor.TryAddCommand(commandData);
-            }
-            catch (Exception ex)
-            {
-                Debug.LogException(ex);
-                return;
-            }
+            CommandExtensions.AddStaticCommand(method, "command-count", "Gets the number of loaded commands.");
         }
 
         static void AddHelp()
         {
-            try
-            {
-                CommandAttribute commandAttribute = new CommandAttribute("help", "Shows a basic help guide for Quantum Console.");
+            var method = typeof(QuantumConsoleProcessor).GetMethod("GetHelp", BindingFlags.Static | BindingFlags.NonPublic);
 
-                CommandData commandData = new CommandData(typeof(QuantumConsoleProcessor).GetMethod("GetHelp", BindingFlags.Static | BindingFlags.NonPublic), commandAttribute);
-
-                QuantumConsoleProcessor.TryAddCommand(commandData);
-            }
-            catch (Exception ex)
-            {
-                Debug.LogException(ex);
-                return;
-            }
+            CommandExtensions.AddStaticCommand(method, "help", "Shows a basic help guide for Quantum Console.");
         }
 
         static void AddManualHelp()
         {
-            try
-            {
-                CommandAttribute commandAttribute = new CommandAttribute("man");
+            var method = typeof(QuantumConsoleProcessor).GetMethod("ManualHelp", BindingFlags.Static | BindingFlags.NonPublic);
 
-                CommandData commandData = new CommandData(typeof(QuantumConsoleProcessor).GetMethod("ManualHelp", BindingFlags.Static | BindingFlags.NonPublic), commandAttribute);
-
-                QuantumConsoleProcessor.TryAddCommand(commandData);
-            }
-            catch (Exception ex)
-            {
-                Debug.LogException(ex);
-                return;
-            }
+            CommandExtensions.AddStaticCommand(method, new string[] { "man", "manual" });
         }
 
         static void AddHelpCommand()
         {
-            try
-            {
-                var method = typeof(QuantumConsoleProcessor).GetMethod("GenerateCommandManual", BindingFlags.Static | BindingFlags.NonPublic);
+            var method = typeof(QuantumConsoleProcessor).GetMethod("GenerateCommandManual", BindingFlags.Static | BindingFlags.NonPublic);
 
-                CommandAttribute commandAttribute = new CommandAttribute("help");
-                CommandData commandData = new CommandData(method, commandAttribute);
-                QuantumConsoleProcessor.TryAddCommand(commandData);
-
-                commandAttribute = new CommandAttribute("man");
-                commandData = new CommandData(method, commandAttribute);
-                QuantumConsoleProcessor.TryAddCommand(commandData);
-            }
-            catch (Exception ex)
-            {
-                Debug.LogException(ex);
-                return;
-            }
+            CommandExtensions.AddStaticCommand(method, new string[] { "help", "man", "manual" });
         }
 
         static void AddCommandList()
         {
-            try
-            {
-                CommandAttribute commandAttribute = new CommandAttribute("commands", "Shows a basic help guide for Quantum Console.");
+            var method = typeof(QuantumConsoleProcessor).GetMethod("GenerateCommandList", BindingFlags.Static | BindingFlags.NonPublic);
 
-                CommandData commandData = new CommandData(typeof(QuantumConsoleProcessor).GetMethod("GenerateCommandList", BindingFlags.Static | BindingFlags.NonPublic), commandAttribute);
-
-                QuantumConsoleProcessor.TryAddCommand(commandData);
-            }
-            catch (Exception ex)
-            {
-                Debug.LogException(ex);
-                return;
-            }
+            CommandExtensions.AddStaticCommand(method, "commands", "Shows a basic help guide for Quantum Console.");
         }
 
         public static int TestCommand(int a, int b)
