@@ -23,7 +23,7 @@ You can use the console in the Main Menu. Commands that are need a World/Savegam
 ![Picture of Quantum console in Foundry's Main Menu](https://github.com/ldgkrey/foundrygamemods_qcenabler/assets/25432637/9d298c68-3520-4660-a316-5b608e340bcb)
 
 ## Installation
-Extract the zip from the release page into your Mods folder.
+Extract the zip from the [Release](https://github.com/ldgkrey/foundrygamemods_qcenabler/releases) page into your Mods folder.
 
 ## Todo
 - KeyConfiguration
