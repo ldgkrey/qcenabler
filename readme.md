@@ -20,6 +20,8 @@ With tab you can auto-complete commands and show syntax of command.
 
 You can use the console in the Main Menu. Commands that are need a World/Savegame context like teleporting should check for right environment before executing. This is not done by the console.
 
+![Picture of Quantum console in Foundry's Main Menu](https://github.com/ldgkrey/foundrygamemods_qcenabler/assets/25432637/9d298c68-3520-4660-a316-5b608e340bcb)
+
 ## Installation
 Extract the zip. Into your Mods folder.
 
