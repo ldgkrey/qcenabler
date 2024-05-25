@@ -66,7 +66,7 @@ namespace LDGKrey.QCEnabler
                 console.LogToConsole(log);
             }
 
-            Commands.AddCommands();
+            BasicCommands.AddCommands();
 
             //console.Activate(true);
         }

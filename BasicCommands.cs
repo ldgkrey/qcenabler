@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace LDGKrey.QCEnabler
 {
-    public static class Commands
+    public static class BasicCommands
     {
         public static void AddCommands()
         {
@@ -19,9 +19,9 @@ namespace LDGKrey.QCEnabler
 
         static void AddTestCommand()
         {
-            var method = typeof(Commands).GetMethod(nameof(TestCommand));
+            var method = typeof(BasicCommands).GetMethod(nameof(TestCommand));
 
-            if (!AddCommand(method, new string[] { "calcAdd", "calc" }, "Adds two integers togther"))
+            if (!CommandExtensions.AddStaticCommand(method, new string[] { "calcAdd", "calc" }, "Adds two integers togther"))
                 Debug.LogWarning("Could not add 'calcAdd' to commands.");
         }
 
@@ -117,37 +117,6 @@ namespace LDGKrey.QCEnabler
         public static int TestCommand(int a, int b)
         {
             return a + b;
-        }
-
-        //Utility
-        public static bool AddCommand(MethodInfo method, string alias, string description = "")
-            => AddCommandLogic(method, alias, description);
-
-        public static bool AddCommand(MethodInfo method, string[] aliases, string description = "")
-        {
-            var result = true;
-            foreach(var alias in aliases)
-            {
-                if (!AddCommandLogic(method, alias, description))
-                    result = false;
-            }
-
-            return result;
-        }
-
-        static bool AddCommandLogic(MethodInfo method, string alias, string description = "")
-        {
-            try
-            {
-                CommandAttribute commandAttribute = new CommandAttribute(alias, description);
-                CommandData commandData = new CommandData(method, commandAttribute);
-                return QuantumConsoleProcessor.TryAddCommand(commandData);
-            }
-            catch (Exception ex)
-            {
-                Debug.LogException(ex);
-                return false;
-            }
         }
     }
 }
