@@ -14,6 +14,12 @@ Quantum Console is a asset from the Unity Assetstore that is shipped with the ga
 Currently the command scanning functionalty is disabled. The way QC is scanning for the Commands in the loaded Assemblies throws Exceptions because of something with Mscorlib.
 You can add commands with QuantumConsoleProcessor.TryAddCommand and your constructed commandata object or you use my CommandExtensions.AddCommand Method by reference the dll of the mod.
 
+For a list of commands available, you can type "commands" (without quotes). You dont need to add a slash infront of the commands. The commands are case sensitive.
+
+With tab you can auto-complete commands and show syntax of command.
+
+You can use the console in the Main Menu. Commands that are need a World/Savegame context like teleporting should check for right environment before executing. This is not done by the console.
+
 ## Installation
 Extract the zip. Into your Mods folder.
 
