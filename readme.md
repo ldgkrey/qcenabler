@@ -12,7 +12,7 @@ Quantum Console is a asset from the Unity Assetstore that is shipped with the ga
 - While ingame you might need to unlock the mouse. Opening the crafting or inventory menu should suffice.<br />
 
 Currently the command scanning functionalty is disabled. The way QC is scanning for the Commands in the loaded Assemblies throws Exceptions because of something with Mscorlib.
-You can add commands with QuantumConsoleProcessor.TryAddCommand and your constructed commandata object or you use my CommandExtensions.AddCommand Method by reference the dll of the mod.
+You can add commands with QuantumConsoleProcessor.TryAddCommand and your constructed commanddata object or you use my CommandExtensions.AddCommand Method by reference the dll of the mod.
 
 For a list of commands available, you can type "commands" (without quotes). You dont need to add a slash infront of the commands. The commands are case sensitive.
 
