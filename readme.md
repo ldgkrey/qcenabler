@@ -28,3 +28,4 @@ Extract the zip from the [Release](https://github.com/ldgkrey/foundrygamemods_qc
 ## Todo
 - KeyConfiguration
 - Investigate what part of the scanning throws the error and try to fix it.
+- Cursor locking/unlocking (currently a ingame ui is needed for interaction)
