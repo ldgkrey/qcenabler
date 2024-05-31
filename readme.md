@@ -8,7 +8,7 @@ Quantum Console is a asset from the Unity Assetstore that is shipped with the ga
 
 ## Usage
 - To open or close the console you press F11.<br />
-- The console is ready to open after the main menu is loaded.<br />
+- The console is ready to use after the main menu is loaded.<br />
 - While ingame you might need to unlock the mouse. Opening the crafting or inventory menu should suffice.<br />
 
 Currently the command scanning functionalty is disabled. The way QC is scanning for the Commands in the loaded Assemblies throws Exceptions because of something with Mscorlib.
