@@ -26,6 +26,6 @@ You can use the console in the Main Menu. Commands that are need a World/Savegam
 Extract the zip from the [Release](https://github.com/ldgkrey/foundrygamemods_qcenabler/releases) page into your Mods folder.
 
 ## Todo
-- KeyConfiguration
+- Configurations ( key config at least)
 - Investigate what part of the scanning throws the error and try to fix it.
 - Cursor locking/unlocking (currently a ingame ui is needed for interaction)
