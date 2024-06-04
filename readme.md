@@ -7,9 +7,8 @@ Quantum Console is a asset from the Unity Assetstore that is shipped with the ga
 [Documentation](https://www.qfsw.co.uk/docs/QC/articles/quickstart/quickstart.html)
 
 ## Usage
-- To open or close the console you press F11.<br />
-- The console is ready to use after the main menu is loaded.<br />
-- While ingame you might need to unlock the mouse. Opening the crafting or inventory menu should suffice.<br />
+- To open or close the console you press F11 or your configured button.
+- Change Configurations using the [Configurator](https://github.com/erkle64/Configurator) mod or modify the config file directly.
 
 Currently the command scanning functionalty is disabled. The way QC is scanning for the Commands in the loaded Assemblies throws Exceptions because of something with Mscorlib.
 You can add commands with QuantumConsoleProcessor.TryAddCommand and your constructed commanddata object or you use my CommandExtensions.AddCommand Method by reference the dll of the mod.
@@ -26,6 +25,4 @@ You can use the console in the Main Menu. Commands that are need a World/Savegam
 Extract the zip from the [Release](https://github.com/ldgkrey/foundrygamemods_qcenabler/releases) page into your Mods folder.
 
 ## Todo
-- Configurations ( key config at least)
 - Investigate what part of the scanning throws the error and try to fix it.
-- Cursor locking/unlocking (currently a ingame ui is needed for interaction)
