@@ -22,8 +22,8 @@ You can use the console in the Main Menu. Commands that are need a World/Savegam
 ![Picture of Quantum console in Foundry's Main Menu](https://github.com/ldgkrey/foundrygamemods_qcenabler/assets/25432637/9d298c68-3520-4660-a316-5b608e340bcb)
 
 ## Installation
-- You need to also install the [Unfoundry](https://github.com/erkle64/Unfoundry) mod.
 - Extract the zip from the [Release](https://github.com/ldgkrey/foundrygamemods_qcenabler/releases) page into your Mods folder.
+- You need to also install the [Unfoundry](https://github.com/erkle64/Unfoundry) mod.
 
 ## Todo
 - Investigate what part of the scanning throws the error and try to fix it.
