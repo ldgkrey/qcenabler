@@ -9,20 +9,11 @@ namespace LDGKrey.QCEnabler
     {
         public static void AddCommands()
         {
-            AddTestCommand();
             AddHelp();
             AddCommandCount();
             AddManualHelp();
             AddHelpCommand();
             AddCommandList();
-        }
-
-        static void AddTestCommand()
-        {
-            var method = typeof(BasicCommands).GetMethod(nameof(TestCommand));
-
-            if (!CommandExtensions.AddStaticCommand(method, new string[] { "calcAdd", "calc" }, "Adds two integers togther"))
-                Debug.LogWarning("Could not add 'calcAdd' to commands.");
         }
 
         static void AddCommandCount()
@@ -58,11 +49,6 @@ namespace LDGKrey.QCEnabler
             var method = typeof(QuantumConsoleProcessor).GetMethod("GenerateCommandList", BindingFlags.Static | BindingFlags.NonPublic);
 
             CommandExtensions.AddStaticCommand(method, "commands", "Shows a basic help guide for Quantum Console.");
-        }
-
-        public static int TestCommand(int a, int b)
-        {
-            return a + b;
         }
     }
 }
