@@ -20,7 +20,7 @@ namespace LDGKrey.QCEnabler
             MODNAME = "QCEnabler",
             AUTHOR = "ldgKrey",
             GUID = AUTHOR + "." + MODNAME,
-            VERSION = "0.2";
+            VERSION = "0.3";
 
         static Mod _mod;
         static Dictionary<string, UnityEngine.Object> bundleMainAssets;
