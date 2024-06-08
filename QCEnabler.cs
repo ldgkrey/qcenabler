@@ -25,7 +25,7 @@ namespace LDGKrey.QCEnabler
         static Mod _mod;
         static Dictionary<string, UnityEngine.Object> bundleMainAssets;
         static LogSource log;
-        static QCEnabler instance;
+        public static QCEnabler instance;
 
         ConsoleConfig consoleConfig;
 
@@ -112,7 +112,11 @@ namespace LDGKrey.QCEnabler
             //UI / Positioning
             consoleConfig.ConsolePosition.onChanged += OnConsolePositionChange;
 
+            //LogLevel
+            if (consoleConfig.LogLevel.Get() != LoggingLevel.Full)
+                ChangeLogLevel(consoleConfig.LogLevel.Get());
 
+            consoleConfig.LogLevel.onChanged += OnLogLevelSettingChanged;
 
             //Cursor lock/unlock
             console.OnActivate += OnActivate;
@@ -120,6 +124,38 @@ namespace LDGKrey.QCEnabler
         }
 
         bool settingsChanged = false;
+
+        #region LogLevel
+
+        public void ChangeLogLevel(LoggingLevel newLogLevel, bool setSettings = true)
+        {
+            if (QuantumConsoleProcessor.loggingLevel == newLogLevel)
+                return;
+
+            log.Log($"change log level to {newLogLevel}");
+
+            if (setSettings)
+            {
+                skipLogLevelchange = true;
+                consoleConfig.LogLevel.Set(newLogLevel);
+            }
+
+            QuantumConsoleProcessor.loggingLevel = newLogLevel;
+        }
+
+        bool skipLogLevelchange = false;
+        void OnLogLevelSettingChanged(LoggingLevel oldValue, LoggingLevel newValue)
+        {
+            if (skipLogLevelchange)
+            {
+                skipLogLevelchange = false;
+                return;
+            }
+
+            ChangeLogLevel(newValue);
+        }
+
+        #endregion
 
         #region Zoom
         const int zoomLevelMin = 10;

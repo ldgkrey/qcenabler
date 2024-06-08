@@ -1,7 +1,5 @@
 ﻿using QFSW.QC;
-using System;
 using System.Reflection;
-using UnityEngine;
 
 namespace LDGKrey.QCEnabler
 {
@@ -14,6 +12,8 @@ namespace LDGKrey.QCEnabler
             AddManualHelp();
             AddHelpCommand();
             AddCommandList();
+            AddClearCommand();
+            AddChangeLogLevelCommand();
         }
 
         static void AddCommandCount()
@@ -50,5 +50,25 @@ namespace LDGKrey.QCEnabler
 
             CommandExtensions.AddStaticCommand(method, "commands", "Shows a basic help guide for Quantum Console.");
         }
+
+        static void AddClearCommand()
+        {
+            var method = typeof(BasicCommands).GetMethod(nameof(ClearDelegate), BindingFlags.Static | BindingFlags.NonPublic);
+
+            CommandExtensions.AddStaticCommand(method, "clear", "Clears the console window, full log stays in your persistent game folder.");
+        }
+
+        static void ClearDelegate()
+            => QuantumConsole.Instance.ClearConsole();
+
+        static void AddChangeLogLevelCommand()
+        {
+            var method = typeof(BasicCommands).GetMethod(nameof(ChangeLogLevelDelegate), BindingFlags.Static | BindingFlags.NonPublic);
+
+            CommandExtensions.AddStaticCommand(method, "SetLogLevel", "Sets the loglevel. (Optional) Can set your loglevel settings permanent.");
+        }
+
+        static void ChangeLogLevelDelegate(LoggingLevel logLevel, bool saveToSettings = false)
+            => QCEnabler.instance.ChangeLogLevel(logLevel, saveToSettings);
     }
 }
