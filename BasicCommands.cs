@@ -15,7 +15,7 @@ namespace LDGKrey.QCEnabler
             //AddHelpCommand();
             //AddCommandList();
             //AddClearCommand();
-            AddChangeLogLevelCommand();
+            //AddChangeLogLevelCommand();
         }
 
         static void AddCommandCount()
@@ -70,6 +70,7 @@ namespace LDGKrey.QCEnabler
             CommandExtensions.AddStaticCommand(method, "SetLogLevel", "Sets the loglevel. (Optional) Can set your loglevel settings permanent.");
         }
 
+        [Command("SetLogLevel", "Sets the loglevel. (Optional) Can set your loglevel settings permanent.", MonoTargetType.Single)]
         static void ChangeLogLevelDelegate(LoggingLevel logLevel, bool saveToSettings = false)
             => QCEnabler.instance.ChangeLogLevel(logLevel, saveToSettings);
     }

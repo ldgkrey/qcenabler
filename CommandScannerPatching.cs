@@ -18,7 +18,6 @@ namespace LDGKrey.QCEnabler
             //if (hasIgnoreAttribute)
             //    return false;
 
-
             string[] array = new string[14] { "System", "Unity", "Microsoft", "Mono.", "mscorlib", "NSubstitute", "JetBrains", "nunit.", "QFSW.QC", "Newtonsoft", "Sirenix", "Rewired", "Harmony", "Dreamteck" };
             string[] array2 = new string[2] { "mcs", "AssetStoreTools" };
             string fullName = assembly.FullName;
@@ -40,20 +39,29 @@ namespace LDGKrey.QCEnabler
                     return false;
                 }
             }
-            __result = true;
-            //skip original but set result to true
-            //Debug.Log($"Assembly {assembly.FullName}");
 
+            //skip original but set result to true
+            __result = true;
             return false;
         }
 
+        //rewrite the complete Logic
         [HarmonyPatch(typeof(QuantumConsoleProcessor), "LoadCommandsFromType")]
         [HarmonyPrefix]
-        static void LoadCommandsFromType_Patch(Type type)
+        static bool LoadCommandsFromType_Patch(Type type)
         {
             CommandExtensions.AddCommandsFromType(type);
 
-            return;
+            //skip original
+            return false;
+        }
+
+        [HarmonyPatch(typeof(QuantumConsole), "Initialize")]
+        [HarmonyPrefix]
+        static void Initialize_Patch()
+        {
+            var field = typeof(QuantumConsoleProcessor).GetField("_loadedAssemblies", BindingFlags.Static | BindingFlags.NonPublic);
+            field.SetValue(null, AppDomain.CurrentDomain.GetAssemblies());
         }
 
         //[HarmonyPatch(typeof(QuantumConsoleProcessor), "GenerateCommandTable")]
