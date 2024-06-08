@@ -32,7 +32,7 @@ namespace LDGKrey.QCEnabler.Configuration
                     .Entry<Vector2>(out configuration.ConsolePosition, "(Disabled)Console position on screen", Vector2.zero , false, "Set the position of the console on screen.(Disabled in code, currently not working)")
                 .EndGroup()
                 .Group("Position")
-                    .Entry<bool>(out configuration.RememberZoomLevel, "Remember zoom level", false, false, "If enabled the console zoom level will be remebered after closing.")
+                    .Entry<bool>(out configuration.RememberZoomLevel, "Remember zoom level", true, false, "If enabled the console zoom level will be remebered after closing.")
                     .Entry<int>(out configuration.ZoomLevel, "Console zoom level", 100, false, "Set the zoom level of the console.")
                 .EndGroup()
                 .Group("KeyConfig")

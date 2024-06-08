@@ -37,5 +37,29 @@ namespace LDGKrey.QCEnabler
                 return false;
             }
         }
+
+        static MethodInfo ExtractCommandMethods_Pointer = typeof(QuantumConsoleProcessor).GetMethod("ExtractCommandMethods", BindingFlags.Static | BindingFlags.NonPublic);
+        static MethodInfo LoadCommandsFromMember_Pointer = typeof(QuantumConsoleProcessor).GetMethod("LoadCommandsFromMember", BindingFlags.Static | BindingFlags.NonPublic);
+        public static void AddCommandsFromType(Type type)
+        {
+            if (type.GetCustomAttribute<QcIgnoreAttribute>() != null)
+            {
+                return;
+            }
+
+            foreach (var (method, memberInfo) in ExtractCommandMethods_Pointer.Invoke(null, new object[] { type }) as IEnumerable<(MethodInfo, MemberInfo)>)
+            {
+                if (memberInfo.DeclaringType == type)
+                {
+                    LoadCommandsFromMember_Pointer.Invoke(null, new object[] { memberInfo, method });
+                }
+            }
+        }
+
+        public static void AddCommandsFromType<T>()
+        {
+            var type = typeof(T);
+            AddCommandsFromType(type);
+        }
     }
 }

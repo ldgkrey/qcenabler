@@ -20,7 +20,7 @@ namespace LDGKrey.QCEnabler
             MODNAME = "QCEnabler",
             AUTHOR = "ldgKrey",
             GUID = AUTHOR + "." + MODNAME,
-            VERSION = "0.3";
+            VERSION = "0.4";
 
         static Mod _mod;
         static Dictionary<string, UnityEngine.Object> bundleMainAssets;
@@ -48,6 +48,7 @@ namespace LDGKrey.QCEnabler
         QuantumKeyConfig keyConfig;
         DynamicCanvasScaler zoomController;
         RectTransform consoleRect;
+
 
         void InstantiateConsole()
         {
@@ -339,8 +340,8 @@ namespace LDGKrey.QCEnabler
             public static void InitializeMscorelibFix()
             {
                 //Skip command table generation because of problems with mscorlib and the way QC detects scans the assemblies
-                var property = typeof(QuantumConsoleProcessor).GetProperty("TableGenerated", BindingFlags.Static | BindingFlags.Public);
-                property.SetValue(null, true);
+                //var property = typeof(QuantumConsoleProcessor).GetProperty("TableGenerated", BindingFlags.Static | BindingFlags.Public);
+                //property.SetValue(null, true);
             }
 
             [HarmonyPatch(typeof(ZoomUIController), "ZoomUp")]

@@ -7,12 +7,14 @@ namespace LDGKrey.QCEnabler
     {
         public static void AddCommands()
         {
-            AddHelp();
-            AddCommandCount();
-            AddManualHelp();
-            AddHelpCommand();
-            AddCommandList();
-            AddClearCommand();
+            CommandExtensions.AddCommandsFromType(typeof(QuantumConsoleProcessor));
+
+            //AddHelp();
+            //AddCommandCount();
+            //AddManualHelp();
+            //AddHelpCommand();
+            //AddCommandList();
+            //AddClearCommand();
             AddChangeLogLevelCommand();
         }
 
