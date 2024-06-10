@@ -198,9 +198,8 @@ namespace LDGKrey.QCEnabler
 
         #endregion
 
-        #region Position Not working currently
+        #region Position
         bool skipOnConsolePositionChange = false;
-        //have to look into the dynamicscaler because something with offsets is changed and the position cannot be reliable saved or loaded
         MethodInfo dynamicScalerUpdate = typeof(DynamicCanvasScaler).GetMethod("Update", BindingFlags.Instance | BindingFlags.NonPublic);
         void OnConsolePositionChange(Vector2 oldValue, Vector2 newValue)
         {

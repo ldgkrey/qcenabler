@@ -28,8 +28,8 @@ namespace LDGKrey.QCEnabler.Configuration
 
             configuration.config = new Config(QCEnabler.GUID)
                 .Group("Position")
-                    .Entry<bool>(out configuration.RememberPosition, "(Disabled)Remember closing position", false, false, "If enabled the console position will be remebered after closing.(Disabled in code, currently not working)")
-                    .Entry<Vector2>(out configuration.ConsolePosition, "(Disabled)Console position on screen", Vector2.zero , false, "Set the position of the console on screen.(Disabled in code, currently not working)")
+                    .Entry<bool>(out configuration.RememberPosition, "Remember closing position", false, false, "If enabled the console position will be remebered after closing.")
+                    .Entry<Vector2>(out configuration.ConsolePosition, "Console position on screen", Vector2.zero , false, "Set the position of the console on screen.")
                 .EndGroup()
                 .Group("Position")
                     .Entry<bool>(out configuration.RememberZoomLevel, "Remember zoom level", true, false, "If enabled the console zoom level will be remebered after closing.")
