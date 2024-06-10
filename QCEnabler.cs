@@ -201,36 +201,39 @@ namespace LDGKrey.QCEnabler
         #region Position Not working currently
         bool skipOnConsolePositionChange = false;
         //have to look into the dynamicscaler because something with offsets is changed and the position cannot be reliable saved or loaded
+        MethodInfo dynamicScalerUpdate = typeof(DynamicCanvasScaler).GetMethod("Update", BindingFlags.Instance | BindingFlags.NonPublic);
         void OnConsolePositionChange(Vector2 oldValue, Vector2 newValue)
         {
-            //if (skipOnConsolePositionChange)
-            //{
-            //    skipOnConsolePositionChange = false;
-            //    return;
-            //}
+            if (skipOnConsolePositionChange)
+            {
+                skipOnConsolePositionChange = false;
+                return;
+            }
 
-            //if(!consoleConfig.RememberPosition.Get())
-            //    return;
+            if (!consoleConfig.RememberPosition.Get())
+                return;
 
-            //log.Log($"new position {newValue}");
+            dynamicScalerUpdate.Invoke(zoomController, null);
 
-            //consoleRect.anchoredPosition = newValue / zoomController.ZoomMagnification;
+            log.Log($"new position {newValue}");
+
+            consoleRect.anchoredPosition = newValue / zoomController.ZoomMagnification;
         }
 
         void SavePosition()
         {
-            //if (!consoleConfig.RememberPosition.Get())
-            //    return;
+            if (!consoleConfig.RememberPosition.Get())
+                return;
 
-            //var currentPosition = consoleRect.anchoredPosition * zoomController.ZoomMagnification;
-            //if (currentPosition == Vector2.zero)
-            //    return;
+            var currentPosition = consoleRect.anchoredPosition * zoomController.ZoomMagnification;
+            if (currentPosition == Vector2.zero)
+                return;
 
-            //log.Log($"current position {currentPosition}");
+            log.Log($"current position {currentPosition}");
 
-            //skipOnConsolePositionChange = true;
-            //consoleConfig.ConsolePosition.Set(currentPosition);
-            //settingsChanged = true;
+            skipOnConsolePositionChange = true;
+            consoleConfig.ConsolePosition.Set(currentPosition);
+            settingsChanged = true;
         }
 
         #endregion

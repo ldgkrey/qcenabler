@@ -1,4 +1,5 @@
 ﻿using QFSW.QC;
+using QFSW.QC.UI;
 using System.Reflection;
 
 namespace LDGKrey.QCEnabler
