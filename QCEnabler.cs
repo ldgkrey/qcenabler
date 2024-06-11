@@ -214,8 +214,6 @@ namespace LDGKrey.QCEnabler
 
             dynamicScalerUpdate.Invoke(zoomController, null);
 
-            log.Log($"new position {newValue}");
-
             consoleRect.anchoredPosition = newValue / zoomController.ZoomMagnification;
         }
 
@@ -227,8 +225,6 @@ namespace LDGKrey.QCEnabler
             var currentPosition = consoleRect.anchoredPosition * zoomController.ZoomMagnification;
             if (currentPosition == Vector2.zero)
                 return;
-
-            log.Log($"current position {currentPosition}");
 
             skipOnConsolePositionChange = true;
             consoleConfig.ConsolePosition.Set(currentPosition);
