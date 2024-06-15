@@ -14,7 +14,7 @@ using UnityEngine;
 namespace LDGKrey.QCEnabler
 {
     [UnfoundryMod(GUID)]
-    public class QCEnabler : UnfoundryPlugin
+    public class QCEnabler : UnfoundryPlugin, IEscapeCloseable
     {
         public const string
             MODNAME = "QCEnabler",
@@ -250,6 +250,8 @@ namespace LDGKrey.QCEnabler
                 consoleConfig.Save();
                 settingsChanged = false;
             }
+
+            iec_registerFrameClosing();
         }
 
         private void OnActivate()
@@ -264,6 +266,23 @@ namespace LDGKrey.QCEnabler
 
             if (consoleConfig.ConsolePosition.Get() != Vector2.zero)
                 OnConsolePositionChange(Vector2.zero, consoleConfig.ConsolePosition.Get());
+
+            iec_registerFrameOpening();
+        }
+
+        void iec_registerFrameOpening()
+        {
+            GlobalStateManager.registerEscapeCloseable(this);
+        }
+
+        void iec_registerFrameClosing()
+        {
+            GlobalStateManager.deRegisterEscapeCloseable(this);
+        }
+
+        public void iec_triggerFrameClose()
+        {
+            console.Deactivate();
         }
         #endregion
 
@@ -354,6 +373,19 @@ namespace LDGKrey.QCEnabler
             public static void OnZoomDownPostFix(ZoomUIController __instance)
             {
                 instance.OnZoomButtonPressed();
+            }
+
+            [HarmonyPatch(typeof(ChatFrame), nameof(ChatFrame.showMessageBox))]
+            [HarmonyPrefix]
+            //return false to skip
+            public static bool OnShowMessageBox(ChatFrame __instance)
+            {
+                if (QuantumConsole.Instance.IsActive)
+                    //skip chatframe
+                    return false;
+
+                //continue opening chatframe
+                return true;
             }
         }
     }
